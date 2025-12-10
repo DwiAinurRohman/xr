@@ -1,0 +1,82 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>WebAR - Flora & Fauna Educasi (Demo)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <!-- A-Frame & AR.js (uses three.js internally) -->
+  <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
+  <script src="main.js"></script>
+</head>
+<body>
+  <header>
+    <h1>AR Edu: Flora & Fauna (Demo)</h1>
+    <nav>
+      <button id="btn-scan">Scan AR</button>
+      <button id="btn-gallery">Daftar Spesies</button>
+      <button id="btn-info">Informasi Konservasi</button>
+    </nav>
+  </header>
+
+  <main id="app">
+    <!-- AR scene -->
+    <section id="ar-section" class="hidden">
+      <a-scene embedded arjs="trackingMethod: best; sourceType: webcam;" vr-mode-ui="enabled: false">
+        <!-- Marker: use preset "hiro" (standard AR.js marker) -->
+       <a-nft
+   type="nft"
+   url="markers/marker"
+   smooth="true"
+   smoothCount="10"
+   smoothTolerance="0.01"
+   smoothThreshold="5">
+  
+   <a-entity gltf-model="models/rafflesia.glb"
+             scale="0.5 0.5 0.5"
+             position="0 0 0">
+   </a-entity>
+  
+</a-nft>
+
+
+          <!-- Example 3D object: replace with your glTF model or Blender-exported GLB -->
+          <a-box id="species-box" position="0 0.5 0" rotation="0 45 0" depth="0.6" height="0.6" width="0.6" visible="false"></a-box>
+
+          <!-- A simple label -->
+          <a-entity id="label" position="0 1.2 0" visible="false">
+            <a-text id="label-text" value="Species Name" align="center" color="#ffffff" width="4"></a-text>
+          </a-entity>
+        </a-marker>
+        <a-entity camera></a-entity>
+      </a-scene>
+      <div id="overlay">
+        <div id="info-card" class="hidden">
+          <h2 id="sp-name">Nama Spesies</h2>
+          <p id="sp-desc">Deskripsi singkat tentang spesies akan muncul di sini ketika marker terdeteksi.</p>
+          <p><strong>Habitat:</strong> <span id="sp-habitat"></span></p>
+          <p><strong>Status:</strong> <span id="sp-status"></span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Simple gallery -->
+    <section id="gallery-section" class="hidden">
+      <h2>Daftar Spesies (Contoh)</h2>
+      <ul id="species-list"></ul>
+    </section>
+
+    <!-- Info konservasi -->
+    <section id="info-section" class="hidden">
+      <h2>Informasi Konservasi</h2>
+      <p>Gunakan aplikasi ini untuk meningkatkan kesadaran. Tambahkan data konservasi nyata pada implementasi akhir.</p>
+    </section>
+  </main>
+
+  <footer>
+    <small>Demo project - replace the box with glTF/GLB model and custom markers.</small>
+  </footer>
+</body>
+</html>
